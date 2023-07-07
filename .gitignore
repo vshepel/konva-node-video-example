@@ -107,3 +107,4 @@ dist
 output.mp4
 
 .idea
+.DS_Store

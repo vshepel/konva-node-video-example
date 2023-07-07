@@ -7,7 +7,7 @@ import {
   loadImageAsset,
   makeAnimation,
   combineAnimations,
-} from "./video.utils.js";
+} from "./konvaUtils.js";
 
 function renderBackground(layer) {
   layer.add(
@@ -89,7 +89,7 @@ async function renderLogo(layer) {
   });
 }
 
-export async function renderVideo({ outputDir, output }) {
+export async function konvaRenderVideo({ outputDir, output }) {
   const stage = new Konva.Stage({
     width: c.videoWidth,
     height: c.videoHeight,
