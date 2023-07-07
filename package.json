@@ -7,6 +7,7 @@
     "start": "node src/index.js",
     "clear": "rm -rf ./out/*.png"
   },
+  "type": "module",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/LeanyLabs/konva-node-video-example.git"
@@ -23,9 +24,8 @@
   },
   "homepage": "https://github.com/LeanyLabs/konva-node-video-example#readme",
   "dependencies": {
-    "canvas": "^2.7.0",
-    "execa": "^5.0.0",
-    "konva": "^7.2.5",
-    "konva-node": "^0.11.2"
+    "canvas": "^2.11.2",
+    "execa": "^5.1.1",
+    "konva": "^7.2.5"
   }
 }

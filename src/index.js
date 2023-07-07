@@ -1,11 +1,10 @@
-// init Konva
-require("konva-node");
-const { renderVideo } = require("./renderVideo");
-const path = require("path");
+import { join } from 'path';
+import { renderVideo } from './renderVideo.js';
+import { __dirname } from './video.utils.js';
 
 async function run() {
-  const outputDir = path.join(__dirname, "../out");
-  const output = path.join(__dirname, "../output.mp4");
+  const outputDir = join(__dirname, "../out");
+  const output = join(__dirname, "../output.mp4");
 
   await renderVideo({ outputDir, output });
 }

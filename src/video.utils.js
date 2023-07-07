@@ -1,7 +1,10 @@
-const fs = require("fs");
-const path = require("path");
-const execa = require("execa");
-const Konva = require("konva");
+import fs from 'fs';
+import execa from 'execa';
+import Konva from './konva.js';
+import { dirname, join } from 'path';
+import { fileURLToPath } from 'url';
+
+export const __dirname = dirname(fileURLToPath(import.meta.url));
 
 const frameLength = 6;
 
@@ -11,11 +14,11 @@ function loadKonvaImage(url) {
   });
 }
 
-function loadImageAsset(fileName) {
-  return loadKonvaImage(path.join(__dirname, "../assets", fileName));
+export function loadImageAsset(fileName) {
+  return loadKonvaImage(join(__dirname, "../assets", fileName));
 }
 
-function makeAnimation(callback, { startFrame, duration }) {
+export function makeAnimation(callback, { startFrame, duration }) {
   return (frame) => {
     const thisFrame = frame - startFrame;
     if (thisFrame > 0 && thisFrame <= duration) {
@@ -24,7 +27,7 @@ function makeAnimation(callback, { startFrame, duration }) {
   };
 }
 
-function combineAnimations(...animations) {
+export function combineAnimations(...animations) {
   return (frame) => {
     for (const animation of animations) {
       if (animation) {
@@ -34,13 +37,13 @@ function combineAnimations(...animations) {
   };
 }
 
-async function saveFrame({ stage, outputDir, frame }) {
+export async function saveFrame({ stage, outputDir, frame }) {
   const data = stage.toDataURL();
 
   // remove the data header
   const base64Data = data.substring("data:image/png;base64,".length);
 
-  const fileName = path.join(
+  const fileName = join(
     outputDir,
     `frame-${String(frame + 1).padStart(frameLength, "0")}.png`
   );
@@ -48,7 +51,7 @@ async function saveFrame({ stage, outputDir, frame }) {
   await fs.promises.writeFile(fileName, base64Data, "base64");
 }
 
-async function createVideo({ fps, outputDir, output }) {
+export async function createVideo({ fps, outputDir, output }) {
   await execa(
     "ffmpeg",
     [
@@ -66,12 +69,3 @@ async function createVideo({ fps, outputDir, output }) {
     { cwd: outputDir }
   );
 }
-
-module.exports = {
-  saveFrame,
-  createVideo,
-  loadKonvaImage,
-  loadImageAsset,
-  makeAnimation,
-  combineAnimations,
-};

@@ -1,5 +1,5 @@
-module.exports = {
+export default {
   videoWidth: 1920,
   videoHeight: 1080,
-  videoFps: 25,
+  videoFps: 30,
 };
